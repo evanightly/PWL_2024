@@ -66,7 +66,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/event', [EventController::class, 'index']);
 });
 
-
 Route::redirect('ok', 'test');
 
 Route::view('/welcome', 'welcome', ['name' => 'Galur Arasy L.']);
