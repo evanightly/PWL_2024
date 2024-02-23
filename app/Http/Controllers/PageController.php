@@ -17,4 +17,5 @@ class PageController extends Controller
     public function articles($articleId) {
         return "Halaman Artikel dengan id $articleId";
     }
+
 }
