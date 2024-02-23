@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
@@ -19,25 +23,21 @@ use App\Http\Middleware\Test;
 |
 */
 
-Route::get('/', function () {
-    return 'Selamat Datang';
-});
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/hello', [WelcomeController::class, 'hello']);
+Route::get('/hello', fn () => 'Hello');
 
 Route::get('/world', function () {
     return 'World';
 });
 
-Route::get('/about', function () {
-    return 'NIM : 2141762136 <br> Nama : Galur Arasy L.';
-});
+Route::get('/about', [AboutController::class, 'about']);
 
 Route::get('posts/{id}/comments/{comment}', function ($postId, $commentId) {
     return 'Post ke-' . $postId . ' Komentar ke-' . $commentId;
 });
 
-Route::get('article/{articleId}', [PageController::class, 'articles']);
+Route::get('article/{articleId}', [ArticleController::class, 'articles']);
 
 Route::get(
     '/user/profile',
@@ -67,3 +67,5 @@ Route::prefix('admin')->group(function () {
 Route::redirect('ok', 'test');
 
 Route::view('/welcome', 'welcome', ['name' => 'Galur Arasy L.']);
+
+Route::resource('photos', PhotoController::class)->only(['create', 'store']);
