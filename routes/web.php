@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Test;
 /*
@@ -21,9 +23,7 @@ Route::get('/', function () {
     return 'Selamat Datang';
 });
 
-Route::get('/hello', function () {
-    return 'Hello';
-});
+Route::get('/hello', [WelcomeController::class, 'hello']);
 
 Route::get('/world', function () {
     return 'World';
@@ -37,9 +37,7 @@ Route::get('posts/{id}/comments/{comment}', function ($postId, $commentId) {
     return 'Post ke-' . $postId . ' Komentar ke-' . $commentId;
 });
 
-Route::get('article/{id}', function ($id) {
-    return 'Halaman Artikel dengan ID ' . $id;
-});
+Route::get('article/{articleId}', [PageController::class, 'articles']);
 
 Route::get(
     '/user/profile',
