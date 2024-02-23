@@ -25,7 +25,9 @@ use App\Http\Middleware\Test;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/hello', fn () => 'Hello');
+Route::get('/hello', function () {
+    return 'Hello World';
+});
 
 Route::get('/world', function () {
     return 'World';
@@ -69,3 +71,5 @@ Route::redirect('ok', 'test');
 Route::view('/welcome', 'welcome', ['name' => 'Galur Arasy L.']);
 
 Route::resource('photos', PhotoController::class)->only(['create', 'store']);
+
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
